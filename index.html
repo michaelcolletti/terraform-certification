@@ -185,21 +185,21 @@
 }
 </code></pre>
 <h4 id="example-base-type-list_1">EXAMPLE: Base Type: <em>List</em></h4>
-<p>```
-variable "docker_ports" {
+<pre><code>variable &quot;docker_ports&quot; {
     type = list(object({
     internal = number 
     external = number 
     protocol = string 
-}))  <br />
+}))    
     default = [
       {
         internal = 8300
         external = 8300
-        protocol = "tcp"
+        protocol = &quot;tcp&quot;
       }
 ]
-}</p>
+}
+</code></pre>
 <h3 id="terraform-provisioners">Terraform Provisioners</h3>
 <p>Best Practices include using them sparingly, opting instead for a hyperscaler service if available, when possible.</p>
 <h4 id="additional-tooling-and-integrations">Additional Tooling and Integrations</h4>
@@ -250,5 +250,5 @@ variable "docker_ports" {
 
 <!--
 MkDocs version : 1.2.3
-Build Date UTC : 2022-04-02 19:46:56.876000+00:00
+Build Date UTC : 2022-04-02 19:48:39.108018+00:00
 -->
