@@ -116,15 +116,16 @@
 <p>Declarative Paradigm (Here it is. Behold my deploy.yaml. This is what is to be) </p>
 </li>
 </ul>
-<!-- ---  a bit about Reconciliation loops in orchestration and controllers ----->
+<!---  a bit about Reconciliation loops in orchestration and controllers --->
+
 <h3 id="cloud-agnosticism-with-providers">Cloud Agnosticism with Providers</h3>
-<h3 id="the-terraform-workflow-a-virtuous-lifecycle">The Terraform Workflow: A Virtuous Lifecycle</h3>
+<h3 id="the-terraform-workflow">The Terraform Workflow</h3>
 <ul>
 <li>Init: </li>
 <li>Plan:</li>
-<li>Apply </li>
+<li>Apply: </li>
 <li>
-<p>Destroy </p>
+<p>Destroy:</p>
 </li>
 <li>
 <p>Validate (optional)</p>
@@ -150,7 +151,7 @@
     default = &quot;Fine&quot;
 }
 </code></pre>
-<p><em>Note that description, type and default are optional  so For example, </em>`variable "mystatus" {} _ is valid</p>
+<p><em>Note that description, type and default are optional so For example, <code>variable "mystatus" {}</code>  is valid</em></p>
 <h3 id="validattion-feature">Validattion Feature</h3>
 <ul>
 <li>A superpower of terraform is the validation feature providing conditional validation of configuration code. In this example conditional validation of variable length being greater than 4.</li>
@@ -177,6 +178,7 @@
 <pre><code>variable &quot;os_name&quot; {
     type = string
     default = &quot;Arch&quot;
+    description = &quot;BTW I run Arch&quot;
 }
 </code></pre>
 <h4 id="example-base-type-list">EXAMPLE: Base Type: <em>List</em></h4>
@@ -206,25 +208,20 @@
 <li>Best Practices include using them sparingly, opting instead for a hyperscaler service if available, when possible.</li>
 <li>Two types of Provisioners: <em>Creation Time</em> and <em>Destroy Time</em> provisioner. These can be set to run when a resource is being created or destroyed </li>
 <li>Use only when actions desired are not within Terraforms's declartive model. A Provisioner's state is not examined </li>
-<li>
-<p>Only Zero return codes are valid. If a provisioner returns a non-zero return code , the resource is tainted </p>
-</li>
-<li>
-<p>Here's an example of a <strong>local-exec</strong> provisioner: </p>
-</li>
+<li>Only Zero return codes are valid. If a provisioner returns a non-zero return code , the resource is tainted </li>
 </ul>
-<p>```
-  resource "null_resource" "dummy_resource" {</p>
-<pre><code>provisioner "local-exec" {
-    command = "echo '0' &gt; status.txt"
-</code></pre>
-<p>} 
-    provisioner "local-exec" {
+<p>Here's an example of a <strong>local-exec</strong> provisioner: </p>
+<pre><code>  resource &quot;null_resource&quot; &quot;dummy_resource&quot; {
+
+    provisioner &quot;local-exec&quot; {
+        command = &quot;echo '0' &gt; status.txt&quot;
+  } 
+    provisioner &quot;local-exec&quot; {
         when = destroy
-        command = "echo '1' &gt; status.txt"
+        command = &quot;echo '1' &gt; status.txt&quot;
   } 
 }
-```</p>
+</code></pre>
 <h4 id="additional-tooling-and-integrations">Additional Tooling and Integrations</h4>
               
             </div>
@@ -273,5 +270,5 @@
 
 <!--
 MkDocs version : 1.2.3
-Build Date UTC : 2022-04-02 20:47:16.131965+00:00
+Build Date UTC : 2022-04-02 22:07:51.553752+00:00
 -->
