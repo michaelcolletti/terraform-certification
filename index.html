@@ -67,16 +67,123 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            
+            <li class="nav-item" data-level="2"><a href="#-terraform-written-in-go-is-a-single-binary-that-provides-the-user-magical-powers" class="nav-link">- Terraform, written in Go, is a single binary that provides the user magical powers.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
 <h2 id="terraform-certification-a-journey">Terraform Certification: A Journey</h2>
-<h3 id="journey-towards-terraform-certs">Journey towards Terraform Certs</h3>
+<h3 id="journey-towards-learning-terraform-and-certifying">Journey Towards Learning Terraform and Certifying</h3>
 <ul>
-<li>First off the <a href="https://terraform.io/docs">Terraform docs</a> are dope.</li>
-</ul></div>
+<li>First off, the <a href="https://terraform.io/docs">Terraform docs</a> are dope.</li>
+</ul>
+<h2 id="-terraform-written-in-go-is-a-single-binary-that-provides-the-user-magical-powers">- Terraform, written in Go, is a single binary that provides the user magical powers.</h2>
+<h3 id="what-is-infrastructure-as-code">What is Infrastructure as Code</h3>
+<ul>
+<li>What is Infrastructure as Code</li>
+<li>What are the benefits of Infrastructure as Code?</li>
+<li>What is immutable infrastructure and the benefits of this approach? </li>
+</ul>
+<h3 id="declaritive-vs-procedural-approaches">Declaritive vs Procedural Approaches</h3>
+<p>_ <a href="https://stackoverflow.com/questions/1619834/what-is-the-difference-between-declarative-and-procedural-programming-paradigms">Nice Summary</a></p>
+<ul>
+<li>
+<p>Procedural Paradigm </p>
+</li>
+<li>
+<p>Declarative Paradigm </p>
+</li>
+</ul>
+<h3 id="cloud-agnosticism-with-providers">Cloud Agnosticism with Providers</h3>
+<h3 id="the-terraform-workflow-a-virtuous-lifecycle">The Terraform Workflow: A Virtuous Lifecycle</h3>
+<ul>
+<li>Init: </li>
+<li>Plan:</li>
+<li>Apply </li>
+<li>
+<p>Destroy </p>
+</li>
+<li>
+<p>Validate (optional)</p>
+</li>
+</ul>
+<h3 id="other-cool-features">Other Cool Features</h3>
+<ul>
+<li>terraform fmt : format your code</li>
+<li>terraform graph </li>
+<li>terraform output: Display Outputs as created in output.tf </li>
+<li>terraform refresh refresh an object or </li>
+<li>terraform refresh</li>
+</ul>
+<h3 id="variables">Variables</h3>
+<ul>
+<li>Declaration of variables in .tf files as well as gathered in terraform.tfvars as a <em>best practice</em>.</li>
+<li>Variables can have blank values {} for input and will require them or they'll error. </li>
+<li>Use the <code>variable</code> reserved word to create a variable block that has the following:</li>
+</ul>
+<pre><code>variable &quot;my-status&quot; {
+    description = &quot;How I am&quot;
+    type = string
+    default = &quot;Fine&quot;
+}
+</code></pre>
+<p><em>Note that description, type and default are optional  so For example, </em>`variable "mystatus" {} _ is valid</p>
+<h3 id="validattion-feature">Validattion Feature</h3>
+<ul>
+<li>A superpower of terraform is the validation feature providing conditional validation of configuration code. In this example conditional validation of variable length being greater than 4.</li>
+</ul>
+<pre><code>variable &quot;my-status&quot; {
+    description = &quot;How I am&quot;
+    type = string
+    default = &quot;Fine&quot;
+    validation {
+        condition = length(var.my-status) &gt; 4
+        error = &quot;There is an error in your status, my dude&quot; 
+    }
+}
+</code></pre>
+<ul>
+<li>Use the <code>sensitive</code> config argument to indicate </li>
+</ul>
+<h4 id="variable-types-and-constraints">Variable Types and Constraints</h4>
+<ul>
+<li>Base types: string, number and bool</li>
+<li>Complex Types: list, set, map, object, tuple</li>
+</ul>
+<h4 id="example-base-type-string">EXAMPLE: Base Type: <em>string</em></h4>
+<pre><code>variable &quot;os_name&quot; {
+    type = string
+    default = &quot;Arch&quot;
+}
+</code></pre>
+<h4 id="example-base-type-list">EXAMPLE: Base Type: <em>List</em></h4>
+<pre><code>variable &quot;availability_zone_names&quot; {
+    type = list(string)
+    default = [&quot;us-east-2b&quot;]
+}
+</code></pre>
+<h4 id="example-base-type-list_1">EXAMPLE: Base Type: <em>List</em></h4>
+<p>```
+variable "docker_ports" {
+    type = list(object({
+    internal = number 
+    external = number 
+    protocol = string 
+}))  <br />
+    default = [
+      {
+        internal = 8300
+        external = 8300
+        protocol = "tcp"
+      }
+]
+}</p>
+<h4 id="additional-tooling-and-integrations">Additional Tooling and Integrations</h4></div>
             </div>
         </div>
 
@@ -158,5 +265,5 @@
 
 <!--
 MkDocs version : 1.2.3
-Build Date UTC : 2022-03-31 22:57:54.584327+00:00
+Build Date UTC : 2022-04-02 18:46:32.456834+00:00
 -->
