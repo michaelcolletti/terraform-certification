@@ -128,11 +128,12 @@
 <ul>
 <li>First off, the <a href="https://terraform.io/docs">Terraform docs</a> are well written.</li>
 <li>Much of this is from Moosa Khalid see the awesome class on ACoud Guru</li>
+<li>Another great resource is KP Labs and Zeal Vora @zealvora</li>
 <li>Another excellent course is on Udemy by Zeal Vora https://kplabs.in @zealvora </li>
 <li>The text Infrastructure as Code is also a great reference </li>
-<li>The <a href="https://www.hashicorp.com/tao-of-hashicorp">Tao</a> is the principles and foundation of all of the products in the HashiCorp stack</li>
+<li>The <a href="https://www.hashicorp.com/tao-of-hashicorp">Tao</a> contains the principles and foundation of all of the products in the HashiCorp stack</li>
 <li>
-<p>I noticed that every part of the stack allows solving problems by changing the way work is done.</p>
+<p>These principles really frame the <em>why</em> and inform so much it's worthy of separate mention. Every part of their stacks allow solving problems and like Heroku's 12 Factors, the HashiCorp Tao is a substantial contribution. One could remove any mention of HashiCorp in the Tao and it would be a worthy model to follow. </p>
 </li>
 <li>
 <p>Terraform, written in Go, is a single binary that provides the user magical powers.</p>
@@ -152,7 +153,7 @@
 <p>Procedural Paradigm imperative (examples as iterative)</p>
 </li>
 <li>
-<p>Declarative Paradigm (Here it is. Behold my deploy.yaml. This is what is to be) </p>
+<p>Declarative Paradigm <em>Here it is</em>. Behold my deploy.yaml. This is what is to be. This is the <em>Desired State</em> <a href="https://www.techtarget.com/searchwindowsserver/definition/Monad-Manifesto">Snover/Monad Manifesto</a> </p>
 </li>
 </ul>
 <!---  a bit about Reconciliation loops in orchestration and controllers --->
@@ -164,22 +165,32 @@
 <h3 id="the-terraform-workflow">The Terraform Workflow</h3>
 <ul>
 <li>Init: </li>
+<li>Validate <code>terraform validate</code> and format <code>terraform fmt</code> (optional)</li>
 <li>Plan:</li>
-<li>Apply: </li>
 <li>
-<p>Destroy:</p>
+<p>Apply: </p>
 </li>
 <li>
-<p>Validate (optional)</p>
+<p>Destroy:</p>
 </li>
 </ul>
 <h3 id="other-cool-features">Other Cool Features</h3>
 <ul>
-<li>terraform fmt : format your code</li>
-<li>terraform graph </li>
-<li>terraform output: Display Outputs as created in output.tf </li>
-<li>terraform refresh refresh an object or </li>
-<li>terraform refresh</li>
+<li>
+<p><code>terraform fmt</code> : format your code. Built-in way to make your code more beautiful </p>
+</li>
+<li>
+<p><code>terraform graph</code> : Visualize via a convertible text a graphical depiction of dependency. </p>
+</li>
+<li>
+<p><code>terraform output</code>: Display outputs as created in output.tf</p>
+</li>
+<li>
+<p><code>terraform refresh</code> refresh a resource or group of resources (options to limit refresh are supported)</p>
+</li>
+<li>
+<p><code>terraform providers</code> See the providers that were initialized and have support</p>
+</li>
 </ul>
 <h3 id="variables">Variables</h3>
 <ul>
@@ -194,6 +205,19 @@
 }
 </code></pre>
 <p><em>Note that description, type and default are optional so For example, <code>variable "mystatus" {}</code>  is valid</em></p>
+<ul>
+<li>Introduce variables at the command line </li>
+</ul>
+<pre><code>export TF_VAR_instancetype=&quot;t2.nano&quot;
+terraform plan -var=&quot;instancetype=t2.small&quot;
+</code></pre>
+<ul>
+<li>Define in a variables.tf file</li>
+</ul>
+<pre><code>variable &quot;instancetype&quot; {
+  default = &quot;t2.micro&quot;
+}
+</code></pre>
 <h3 id="validattion-feature">Validattion Feature</h3>
 <ul>
 <li>A superpower of terraform is the validation feature providing conditional validation of configuration code. In this example conditional validation of variable length being greater than 4.</li>
@@ -319,22 +343,29 @@
 <li>Variable Type Constraints control the type of variable values they are Primitive and Complex </li>
 <li>Primitive: includes single type value: number, string, bool (e.g. 15,"Production",True)</li>
 <li>Complex Type Constraints are: list, tuple, map, object These represent multiple types in a single variable </li>
-<li>Complex types can be further divided into two types of Constructors. The first is a <em>Collection</em> which allows multiple values of one primitive to be grouped together. Examples of these are </li>
-<li>list(type)</li>
-<li>map(type)</li>
-<li>set(type)</li>
+<li>
+<p>Complex types can be further divided into two types of Constructors. The first is a <em>Collection</em> which allows multiple values of one primitive to be grouped together. Examples of these are:</p>
+</li>
+<li>
+<p>list(type)</p>
+</li>
+<li>
+<p>map(type)</p>
+</li>
+<li>
+<p>set(type)</p>
+</li>
 </ul>
-<h3 id="complex-type-structural-variable">Complex Type: Structural Variable</h3>
+<h4 id="complex-type-structural-variable">Complex Type: Structural Variable</h4>
 <ul>
-<li>Another Complex type: allows for multiple types (num,string,bool) in the variable value. </li>
-<li>Example could be as follows:
-```
+<li>Another Complex type: allows for multiple types (num,string,bool) in the variable value. An example could be as follows:</li>
+</ul>
+<p>```
 variable "coach" {
   type = object({
     name = string
     hourly = number
-  })</li>
-</ul>
+  })</p>
 <p>}</p>
 <h4 id="additional-tooling-and-integrations">Additional Tooling and Integrations</h4>
 <h3 id="hashicorp-resources">HashiCorp Resources</h3>
@@ -342,7 +373,6 @@ variable "coach" {
 <li>Exam Study Guide (<a href="https://learn.hashicorp.com">HashiCorp Learn</a></li>
 <li>Exam Review Guide (<a href="https://learn.hashicorp.com">HashiCorp Learn</a></li>
 <li>Exam Study Guide (HashiCorp Learn)</li>
-<li></li>
 </ul>
               
             </div>
@@ -391,5 +421,5 @@ variable "coach" {
 
 <!--
 MkDocs version : 1.2.3
-Build Date UTC : 2022-05-08 11:58:55.873354+00:00
+Build Date UTC : 2022-05-23 14:47:26.853488+00:00
 -->
