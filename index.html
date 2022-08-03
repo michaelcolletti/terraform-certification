@@ -54,6 +54,10 @@
                     <li class="toctree-l1 current"><a class="reference internal current" href=".">Terraform Certs</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#journey-towards-learning-terraform-and-certifying">Journey Towards Learning Terraform and Certifying</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#hashicorp-tao">HashiCorp Tao</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#what-is-infrastructure-as-code">What is Infrastructure as Code</a>
     </li>
@@ -68,22 +72,42 @@
     <li class="toctree-l2"><a class="reference internal" href="#variables">Variables</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#validattion-feature">Validattion Feature</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#variable-types-and-constraints">Variable Types and Constraints</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example-base-type-string">EXAMPLE: Base Type: string</a>
+    <li class="toctree-l2"><a class="reference internal" href="#variable-types-and-constraints">Variable Types and Constraints</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example-base-type-list">EXAMPLE: Base Type: List</a>
+    <li class="toctree-l2"><a class="reference internal" href="#example-base-type-string">EXAMPLE: Base Type: string</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#example-base-type-list_1">EXAMPLE: Base Type: List</a>
+    <li class="toctree-l2"><a class="reference internal" href="#example-base-type-list">EXAMPLE: Base Type: List</a>
     </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#example-base-type-list_1">EXAMPLE: Base Type: List</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#terraform-provisioners">Terraform Provisioners</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#terraform-state">Terraform State</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#local-and-remote-state-and-storage">Local and Remote State and Storage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-modules">Using Modules</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#other-cool-features-built-in-functions">Other Cool Features : Built-In Functions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#variable-type-constraints">Variable Type Constraints</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#complex-type-structural-variable">Complex Type: Structural Variable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#looping-and-idempotency-are-amazing">Looping and Idempotency are Amazing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#additional-tooling-and-integrations">Additional Tooling and Integrations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hashicorp-resources">HashiCorp Resources</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#study-items">Study Items</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#further-exploration">Further Exploration</a>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -128,22 +152,25 @@
 <ul>
 <li>First off, the <a href="https://terraform.io/docs">Terraform docs</a> are well written.</li>
 <li>Much of this is from Moosa Khalid see the awesome class on ACoud Guru</li>
-<li>Another great resource is KP Labs and Zeal Vora @zealvora</li>
-<li>Another excellent course is on Udemy by Zeal Vora https://kplabs.in @zealvora </li>
-<li>The text Infrastructure as Code is also a great reference </li>
+<li>Another great resource is KP Labs and Zeal Vora @zealvora excellent course is on Udemy https://kplabs.in @zealvora </li>
+<li>The text Infrastructure as Code is also a great reference Kief Morris</li>
+<li><a href="https://github.com/brikis98/terraform-up-and-running-code">Terraform: Up and Running</a> was/is a great reference and continues to evolve (third edition) and be awesome! Thanks to @brikis98!</li>
+</ul>
+<h4 id="hashicorp-tao">HashiCorp Tao</h4>
+<ul>
 <li>The <a href="https://www.hashicorp.com/tao-of-hashicorp">Tao</a> contains the principles and foundation of all of the products in the HashiCorp stack</li>
 <li>
 <p>These principles really frame the <em>why</em> and inform so much it's worthy of separate mention. Every part of their stacks allow solving problems and like Heroku's 12 Factors, the HashiCorp Tao is a substantial contribution. One could remove any mention of HashiCorp in the Tao and it would be a worthy model to follow. </p>
 </li>
 <li>
-<p>Terraform, written in Go, is a single binary that provides the user magical powers.</p>
+<p>Terraform, written in Go, is a single binary that provides the user magical powers. </p>
 </li>
 </ul>
 <h3 id="what-is-infrastructure-as-code">What is Infrastructure as Code</h3>
 <ul>
 <li>What is Infrastructure as Code</li>
 <li>What are the benefits of Infrastructure as Code?</li>
-<li>What is immutable infrastructure and the benefits of this approach? </li>
+<li>What is immutable infrastructure and the benefits of this approach? Immutability of Variables in functional programming. </li>
 </ul>
 <h3 id="declarative-vs-procedural-approaches">Declarative vs Procedural Approaches</h3>
 <p><a href="https://stackoverflow.com/questions/1619834/what-is-the-difference-between-declarative-and-procedural-programming-paradigms">Nice Summary</a>
@@ -164,20 +191,23 @@
 </ul>
 <h3 id="the-terraform-workflow">The Terraform Workflow</h3>
 <ul>
-<li>Init: </li>
-<li>Validate <code>terraform validate</code> and format <code>terraform fmt</code> (optional)</li>
-<li>Plan:</li>
+<li>Scope what is needed </li>
+<li>Write your code. Declare your resources as desired</li>
+<li>(Optional) Make pretty and more readable via format <code>terraform fmt</code> (optional but nice )</li>
+<li>Init: Initialize the providers you'll be supporting</li>
+<li>(Optional) Validate <code>terraform validate</code> </li>
+<li>Plan: This is where there is a a reconciliation between what exists and what is declaratively desired in the config. </li>
 <li>
-<p>Apply: </p>
+<p>Apply: Instantiate your resources. Terraform handles the needed dependencies and the sequence of the creation or resources.</p>
 </li>
 <li>
-<p>Destroy:</p>
+<p>Destroy: Destroy the resources you have created.</p>
 </li>
 </ul>
 <h3 id="other-cool-features">Other Cool Features</h3>
 <ul>
 <li>
-<p><code>terraform fmt</code> : format your code. Built-in way to make your code more beautiful </p>
+<p><code>terraform fmt</code> : format your code. Built-in way to make your code more beautiful</p>
 </li>
 <li>
 <p><code>terraform graph</code> : Visualize via a convertible text a graphical depiction of dependency. </p>
@@ -235,25 +265,25 @@ terraform plan -var=&quot;instancetype=t2.small&quot;
 <ul>
 <li>Use the <code>sensitive</code> config argument to indicate </li>
 </ul>
-<h4 id="variable-types-and-constraints">Variable Types and Constraints</h4>
+<h3 id="variable-types-and-constraints">Variable Types and Constraints</h3>
 <ul>
 <li>Base types: string, number and bool</li>
 <li>Complex Types: list, set, map, object, tuple</li>
 </ul>
-<h4 id="example-base-type-string">EXAMPLE: Base Type: <em>string</em></h4>
+<h3 id="example-base-type-string">EXAMPLE: Base Type: <em>string</em></h3>
 <pre><code>variable &quot;os_name&quot; {
     type = string
     default = &quot;Arch&quot;
     description = &quot;BTW I run Arch&quot;
 }
 </code></pre>
-<h4 id="example-base-type-list">EXAMPLE: Base Type: <em>List</em></h4>
+<h3 id="example-base-type-list">EXAMPLE: Base Type: <em>List</em></h3>
 <pre><code>variable &quot;availability_zone_names&quot; {
     type = list(string)
     default = [&quot;us-east-2b&quot;]
 }
 </code></pre>
-<h4 id="example-base-type-list_1">EXAMPLE: Base Type: <em>List</em></h4>
+<h3 id="example-base-type-list_1">EXAMPLE: Base Type: <em>List</em></h3>
 <pre><code>variable &quot;docker_ports&quot; {
     type = list(object({
     internal = number 
@@ -322,12 +352,13 @@ terraform plan -var=&quot;instancetype=t2.small&quot;
   }
 }
 </code></pre>
-<h2 id="-one-can-also-create-the-bucket-using-either-terraform-or-the-aws-cli-as-follows-aws-profile-tempprofile-s3api-create-bucket-bucket-tfstate-persist-04-01-2022">- One can also create the bucket using either terraform or the aws cli as follows: aws --profile tempprofile s3api create-bucket --bucket tfstate-persist-04-01-2022</h2>
 <ul>
-<li></li>
+<li>One can also create the bucket using either terraform or the aws cli as follows: aws --profile tempprofile s3api create-bucket --bucket tfstate-persist-04-01-2022</li>
 </ul>
 <h3 id="using-modules">Using Modules</h3>
-<h2 id="-can-be-hosted-or-local-use-a-hierarhical-structure-to-organize-eg-providersvpc">- Can be hosted or local. Use a hierarhical structure to organize e.g. providers/vpc</h2>
+<ul>
+<li>Can be hosted or local. Use a hierarhical structure to organize e.g. providers/vpc </li>
+</ul>
 <h3 id="other-cool-features-built-in-functions">Other Cool Features : Built-In Functions</h3>
 <ul>
 <li>Pre-packaged <a href="https://www.terraform.io/language/functions">built-in functions</a> allow to transform and combine values</li>
@@ -338,7 +369,7 @@ terraform plan -var=&quot;instancetype=t2.small&quot;
 <li>min(6,2,3,4) or max(82,88,19) to finnd the same</li>
 <li>To find if a string is contained within use <code>contains(["configparm1",configparm2", config3,625,23], "config3")</code> This will return a boolean value of true or false </li>
 </ul>
-<h4 id="variable-type-constraints">Variable Type Constraints</h4>
+<h3 id="variable-type-constraints">Variable Type Constraints</h3>
 <ul>
 <li>Variable Type Constraints control the type of variable values they are Primitive and Complex </li>
 <li>Primitive: includes single type value: number, string, bool (e.g. 15,"Production",True)</li>
@@ -360,23 +391,43 @@ terraform plan -var=&quot;instancetype=t2.small&quot;
 <ul>
 <li>Another Complex type: allows for multiple types (num,string,bool) in the variable value. An example could be as follows:</li>
 </ul>
-<p>```
-variable "coach" {
+<pre><code>variable &quot;coach&quot; {
   type = object({
     name = string
     hourly = number
-  })</p>
-<p>}</p>
+  })
+
+}
+</code></pre>
+<h4 id="looping-and-idempotency-are-amazing">Looping and Idempotency are Amazing</h4>
+<p>If ever in an administrator's role of having to copy out a file or perform a task across a sh%t@%n of systems quickly and reliably iterating through a list of endpoints is a common task. The delightful task of assuring state of goodness on the servers you've just sprayed out an errant command and the details around state is an important detail.</p>
 <h4 id="additional-tooling-and-integrations">Additional Tooling and Integrations</h4>
+<ul>
+<li>Terragrunt - See materials <a href="https://github.com/gruntwork-io/terragrunt">Git</a></li>
+</ul>
 <h3 id="hashicorp-resources">HashiCorp Resources</h3>
 <ul>
 <li><a href="https://learn.hashicorp.com/collections/terraform/certification">Exam Study Guide</a> (<a href="https://learn.hashicorp.com">HashiCorp Learn</a></li>
 <li>[Exam Review Guide (<a href="https://learn.hashicorp.com">HashiCorp Learn</a></li>
 </ul>
-<h4 id="study-items">Study Items</h4>
+<h3 id="study-items">Study Items</h3>
 <ul>
-<li>Understand state locking and which backends support it </li>
-<li>Understand the VCS that are supported Github, BitBucket, </li>
+<li>Understand state. Types of Backends. State locking and which backends support it</li>
+<li>The types of blocks: <code>resource</code> <code>data</code> <code>output</code> <code>variable</code> <code>terraform</code></li>
+<li>How does state, the terraform.tfstate file and the live infra work together. </li>
+<li>How are manually created resources dealt with</li>
+<li>Terraform Cloud and Terraform Enterprise, and Terraform OSS. Know the additional features of HCP and differences </li>
+<li>Understand the VCS' that are supported Github, BitBucket, remote backends, </li>
+<li>Sensitive parameter and how secrets and Vault provider are used</li>
+<li>The Provider model and plug-ins. How these work. </li>
+<li>Provisioners: local-exec, remote-exec, using Ansible invocation</li>
+<li>Using the terraform console to debug code </li>
+<li>Loops and Conditionals within Terraform</li>
+</ul>
+<h4 id="further-exploration">Further Exploration</h4>
+<ul>
+<li>The <a href="https://aws.amazon.com/cdk/">AWS CDK</a> is bananas. </li>
+<li><a href="">CDKtf</a> is available for Terraform so HCL can be  used to build in AWS </li>
 </ul>
               
             </div>
@@ -425,5 +476,5 @@ variable "coach" {
 
 <!--
 MkDocs version : 1.2.3
-Build Date UTC : 2022-06-05 19:37:26.924921+00:00
+Build Date UTC : 2022-08-03 01:42:56.788324+00:00
 -->
